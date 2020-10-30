@@ -12,12 +12,10 @@ app.use(cors());
 const repositories = [];
 
 function VerifyId(req, res, next){
-  console.log("verificação iniciada")
   const {id} = req.params;
   if(!isUuid(id)){
     return res.status(400).json({error : "parametro invalido"})
   }
-  console.log("verificação finalizada")
   return next()
 }
 app.use("/repositories/:id", VerifyId)
@@ -50,6 +48,7 @@ app.put("/repositories/:id", (request, response) => {
 });
 
 app.delete("/repositories/:id", (request, response) => {
+  console.log("delete iniciado")
   const {id} = request.params
   const repoIndex = repositories.findIndex(repositorie => repositorie.id === id)
 
